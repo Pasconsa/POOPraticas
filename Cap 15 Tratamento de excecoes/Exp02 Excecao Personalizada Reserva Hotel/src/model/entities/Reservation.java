@@ -47,27 +47,17 @@ public class Reservation {
 
     }
 
-    public String updateDates(Date checkin, Date checkout) {
-
-
-        /* Solução 2 (ruim): método retornando string
-• A semântica da operação é prejudicada
-• Retornar string não tem nada a ver com atualização de reserva
-• E se a operação tivesse que retornar um string?
-• Ainda não é possível tratar exceções em construtores
-• Ainda não há auxílio do compilador: o programador deve "lembrar" de verificar se houve erro
-• A lógica fica estruturada em condicionais aninhadas*/
+    public void updateDates(Date checkin, Date checkout) {
 
         Date now = new Date();
         if (checkin.before(now) || checkout.before(now)) {
-            return "Error in reservation: Reservation dates for update must be future dates.";
+            throw new IllegalArgumentException("Error in reservation: Reservation dates for update must be future dates.") ;
         }
         if (!checkout.after(checkin)) {
-            return "Error in reservation : Check-out date must be after check-in date";
+            throw new IllegalArgumentException( "Error in reservation : Check-out date must be after check-in date");
         }
         this.checkin = checkin;
         this.checkout = checkout;
-        return null;
     }
 
 
