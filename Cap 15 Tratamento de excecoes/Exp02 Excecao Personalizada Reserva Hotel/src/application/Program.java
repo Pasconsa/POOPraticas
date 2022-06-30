@@ -7,6 +7,7 @@ Não posso atualizar as datas de reservas se elas não forem futuras .
 package application;
 
 import model.entities.Reservation;
+import model.exceptions.DomainException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,8 +46,11 @@ public class Program {
             catch (ParseException e) {
                 System.out.println("Invalid date format");
             }
-            catch (IllegalArgumentException e){
+            catch (DomainException e){  //Introduizr DomainException
                 System.out.println("Error in reservation: " + e.getMessage()); //e.getmessage é a frase que esta reservation class
+            }
+            catch (RuntimeException e){  //Introduizr Runtimeexcepition exp erros de digitação
+                System.out.println("Unexpected error");
             }
     }
 
